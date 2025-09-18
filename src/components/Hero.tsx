@@ -5,7 +5,7 @@ const Hero = () => {
     <section className="min-h-screen flex items-center justify-center relative z-10 px-4">
       <div className="text-center space-y-8 animate-fade-in-up">
         <div className="space-y-4">
-          <h1 className="text-6xl md:text-8xl font-premium font-bold bg-gradient-to-r from-aurora-aqua via-aurora-purple to-aurora-green bg-clip-text text-transparent">
+          <h1 className="pb-4 text-6xl md:text-8xl font-premium font-bold bg-gradient-to-r from-aurora-aqua via-aurora-purple to-aurora-green bg-clip-text text-transparent">
             Aditya Barangali
           </h1>
           <h2 className="text-2xl md:text-3xl font-light text-foreground/80">
