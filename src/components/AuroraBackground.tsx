@@ -10,36 +10,36 @@ const AuroraBackground = () => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
       
-      // Subtle mouse interaction - reduce the movement factor
-      const xPos = ((clientX / innerWidth) - 0.5) * 20;
-      const yPos = ((clientY / innerHeight) - 0.5) * 15;
+      // Focused beam follows mouse subtly
+      const xOffset = ((clientX / innerWidth) - 0.5) * 30;
+      const yOffset = ((clientY / innerHeight) - 0.5) * 20;
       
       const layers = auroraRef.current.children;
       Array.from(layers).forEach((layer, index) => {
-        const multiplier = (index + 1) * 0.3;
-        const rotation = Math.sin(Date.now() * 0.0005 + index) * 2;
-        (layer as HTMLElement).style.transform = `translate(${xPos * multiplier}px, ${yPos * multiplier}px) rotate(${rotation}deg)`;
+        const multiplier = (index + 1) * 0.2;
+        const skew = xOffset * 0.1;
+        (layer as HTMLElement).style.transform = `translate(${xOffset * multiplier}px, ${yOffset * multiplier * 0.5}px) skewX(${skew}deg)`;
       });
     };
 
-    // Add automatic animation
+    // Subtle breathing animation for the beam
     const animate = () => {
       if (!auroraRef.current) return;
       
       const layers = auroraRef.current.children;
+      const time = Date.now() * 0.0003;
+      
       Array.from(layers).forEach((layer, index) => {
-        const time = Date.now() * 0.0002;
-        const waveX = Math.sin(time + index * 0.5) * 30;
-        const waveY = Math.cos(time * 0.7 + index * 0.3) * 20;
         const currentTransform = (layer as HTMLElement).style.transform;
+        const breathe = Math.sin(time + index * 0.5) * 5;
         
         if (!currentTransform.includes('translate')) {
-          (layer as HTMLElement).style.transform = `translate(${waveX}px, ${waveY}px)`;
+          (layer as HTMLElement).style.transform = `translateY(${breathe}px) scale(${1 + Math.sin(time) * 0.02})`;
         }
       });
     };
 
-    const animationInterval = setInterval(animate, 50);
+    const animationInterval = setInterval(animate, 60);
     window.addEventListener('mousemove', handleMouseMove);
     
     return () => {
