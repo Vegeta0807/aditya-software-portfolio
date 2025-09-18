@@ -23,7 +23,7 @@ const Skills = () => {
   ];
 
   return (
-    <section className="py-20 px-4 relative z-10">
+    <section id="skills" className="py-20 px-4 relative z-10">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center bg-gradient-to-r from-aurora-orange to-aurora-aqua bg-clip-text text-transparent">
           Skills & Technologies
