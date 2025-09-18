@@ -47,6 +47,17 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Aurora colors
+        aurora: {
+          aqua: "hsl(var(--aurora-aqua))",
+          purple: "hsl(var(--aurora-purple))",
+          green: "hsl(var(--aurora-green))",
+          orange: "hsl(var(--aurora-orange))",
+        },
+        glass: {
+          DEFAULT: "hsl(var(--glass))",
+          border: "hsl(var(--glass-border))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
