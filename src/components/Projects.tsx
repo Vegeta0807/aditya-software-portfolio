@@ -38,7 +38,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 px-4 relative z-10">
+    <section className="py-20 px-4 relative z-10">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center bg-gradient-to-r from-aurora-green to-aurora-orange bg-clip-text text-transparent">
           Featured Projects

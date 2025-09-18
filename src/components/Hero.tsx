@@ -19,19 +19,10 @@ const Hero = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button 
-            variant="aurora" 
-            size="lg" 
-            className="glow-on-hover"
-            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-          >
+          <Button variant="aurora" size="lg" className="glow-on-hover">
             View Projects
           </Button>
-          <Button 
-            variant="glass" 
-            size="lg"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          >
+          <Button variant="glass" size="lg">
             Contact Me
           </Button>
         </div>

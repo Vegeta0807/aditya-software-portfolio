@@ -5,7 +5,7 @@ import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from "lucide-react";
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-20 px-4 relative z-10">
+    <section className="py-20 px-4 relative z-10">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center bg-gradient-to-r from-aurora-purple to-aurora-orange bg-clip-text text-transparent">
           Let's Connect
@@ -67,21 +67,15 @@ const Contact = () => {
               <h3 className="text-2xl font-bold mb-6 text-aurora-purple">Get in Touch</h3>
               
               <div className="space-y-4">
-                <a 
-                  href="mailto:alex.chen@example.com" 
-                  className="flex items-center gap-3 text-foreground/80 hover:text-aurora-aqua transition-colors"
-                >
+                <div className="flex items-center gap-3 text-foreground/80">
                   <Mail className="w-5 h-5 text-aurora-aqua" />
                   <span>alex.chen@example.com</span>
-                </a>
+                </div>
                 
-                <a 
-                  href="tel:+15551234567" 
-                  className="flex items-center gap-3 text-foreground/80 hover:text-aurora-green transition-colors"
-                >
+                <div className="flex items-center gap-3 text-foreground/80">
                   <Phone className="w-5 h-5 text-aurora-green" />
                   <span>+1 (555) 123-4567</span>
-                </a>
+                </div>
                 
                 <div className="flex items-center gap-3 text-foreground/80">
                   <MapPin className="w-5 h-5 text-aurora-orange" />

@@ -170,7 +170,7 @@
     box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.2);
   }
 
-  /* Aurora background - V-shaped focused beam */
+  /* Aurora background */
   .aurora-bg {
     position: fixed;
     top: 0;
@@ -181,98 +181,27 @@
     overflow: hidden;
   }
 
-  @keyframes aurora-beam-flow {
-    0%, 100% { 
-      transform: translateY(0px) scale(1);
-      opacity: 0.8;
-    }
-    50% { 
-      transform: translateY(20px) scale(1.05);
-      opacity: 0.9;
-    }
-  }
-
-  @keyframes aurora-shimmer {
-    0%, 100% { 
-      filter: blur(1px) brightness(1);
-    }
-    50% { 
-      filter: blur(2px) brightness(1.2);
-    }
-  }
-
   .aurora-layer {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0.8;
-    transition: transform 0.2s ease-out;
+    width: 200%;
+    height: 200%;
+    background: var(--aurora-gradient-1);
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: aurora-move 20s infinite linear;
   }
 
-  /* Main V-shaped aurora beam */
-  .aurora-wave-1 {
-    background: radial-gradient(
-      ellipse 60% 40% at 50% 0%,
-      hsl(var(--aurora-orange) / 0.9) 0%,
-      hsl(var(--aurora-orange) / 0.7) 25%,
-      hsl(25 80% 60% / 0.5) 50%,
-      hsl(var(--aurora-aqua) / 0.3) 75%,
-      transparent 100%
-    );
-    clip-path: polygon(
-      40% 0%, 60% 0%, 
-      80% 50%, 70% 100%, 
-      30% 100%, 20% 50%
-    );
-    animation: aurora-beam-flow 8s ease-in-out infinite;
+  .aurora-layer:nth-child(2) {
+    background: var(--aurora-gradient-2);
+    animation: aurora-secondary 25s infinite linear;
+    opacity: 0.2;
   }
 
-  /* Secondary beam for depth */
-  .aurora-wave-2 {
-    background: radial-gradient(
-      ellipse 50% 35% at 50% 0%,
-      hsl(var(--aurora-orange) / 0.6) 0%,
-      hsl(15 90% 65% / 0.4) 30%,
-      hsl(var(--aurora-purple) / 0.3) 60%,
-      hsl(var(--aurora-aqua) / 0.2) 80%,
-      transparent 100%
-    );
-    clip-path: polygon(
-      42% 0%, 58% 0%, 
-      75% 45%, 65% 100%, 
-      35% 100%, 25% 45%
-    );
-    animation: aurora-beam-flow 12s ease-in-out infinite reverse;
-  }
-
-  /* Sharp edge highlights */
-  .aurora-wave-3 {
-    background: linear-gradient(
-      180deg,
-      hsl(var(--aurora-orange) / 0.8) 0%,
-      hsl(var(--aurora-orange) / 0.4) 20%,
-      transparent 40%
-    );
-    clip-path: polygon(
-      45% 0%, 55% 0%, 
-      60% 25%, 40% 25%
-    );
-    animation: aurora-shimmer 6s ease-in-out infinite;
-  }
-
-  /* Bottom glow effect */
-  .aurora-wave-4 {
-    background: radial-gradient(
-      ellipse 80% 30% at 50% 100%,
-      hsl(var(--aurora-aqua) / 0.4) 0%,
-      hsl(var(--aurora-purple) / 0.3) 40%,
-      transparent 70%
-    );
-    clip-path: polygon(
-      20% 60%, 80% 60%, 
-      70% 100%, 30% 100%
-    );
-    animation: aurora-beam-flow 10s ease-in-out infinite;
+  .aurora-layer:nth-child(3) {
+    background: linear-gradient(45deg, hsl(var(--aurora-green)) 0%, hsl(var(--aurora-orange)) 100%);
+    animation: aurora-move 30s infinite linear reverse;
+    opacity: 0.15;
   }
 
   /* Glow effects */
