@@ -106,7 +106,7 @@ const Index = () => {
           <button
             type="button"
             aria-label="Scroll to About"
-            className="group absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
+            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
             onClick={() => scrollTo("about")}
           >
             <ChevronDown className="w-5 h-5 transition group-hover:translate-y-0.5" />
@@ -118,7 +118,7 @@ const Index = () => {
           <button
             type="button"
             aria-label="Scroll to Projects"
-            className="group absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
+            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
             onClick={() => scrollTo("projects")}
           >
             <ChevronDown className="w-5 h-5 transition group-hover:translate-y-0.5" />
@@ -130,7 +130,7 @@ const Index = () => {
           <button
             type="button"
             aria-label="Scroll to Skills"
-            className="group absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
+            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
             onClick={() => scrollTo("skills")}
           >
             <ChevronDown className="w-5 h-5 transition group-hover:translate-y-0.5" />
@@ -142,7 +142,7 @@ const Index = () => {
           <button
             type="button"
             aria-label="Scroll to Contact"
-            className="group absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
+            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
             onClick={() => scrollTo("contact")}
           >
             <ChevronDown className="w-5 h-5 transition group-hover:translate-y-0.5" />

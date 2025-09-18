@@ -46,70 +46,19 @@
 
     --radius: 1rem;
 
-    /* Aurora gradients */
-    --aurora-gradient-1: linear-gradient(135deg, hsl(var(--aurora-aqua)) 0%, hsl(var(--aurora-purple)) 50%, hsl(var(--aurora-green)) 100%);
-    --aurora-gradient-2: linear-gradient(45deg, hsl(var(--aurora-orange)) 0%, hsl(var(--aurora-aqua)) 50%, hsl(var(--aurora-purple)) 100%);
+    /* Glass gradient */
     --glass-gradient: linear-gradient(135deg, hsla(var(--glass), 0.16) 0%, hsla(var(--glass), 0.10) 100%);
 
     /* Glow effects */
     --glow-primary: 0 0 30px hsl(var(--aurora-aqua) / 0.3);
     --glow-accent: 0 0 30px hsl(var(--aurora-purple) / 0.3);
-    --glow-success: 0 0 30px hsl(var(--aurora-green) / 0.3);
-    --glow-warning: 0 0 30px hsl(var(--aurora-orange) / 0.3);
 
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
 }
 
-/* Aurora animations and effects */
+/* Animations and effects */
 @layer base {
-  @keyframes aurora-move {
-    0% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
-    25% { transform: translateX(100%) translateY(-50%) rotate(90deg); }
-    50% { transform: translateX(50%) translateY(100%) rotate(180deg); }
-    75% { transform: translateX(-50%) translateY(50%) rotate(270deg); }
-    100% { transform: translateX(-100%) translateY(-100%) rotate(360deg); }
-  }
-
-  @keyframes aurora-secondary {
-    0% { transform: translateX(100%) translateY(100%) rotate(0deg); }
-    25% { transform: translateX(-100%) translateY(50%) rotate(-90deg); }
-    50% { transform: translateX(-50%) translateY(-100%) rotate(-180deg); }
-    75% { transform: translateX(50%) translateY(-50%) rotate(-270deg); }
-    100% { transform: translateX(100%) translateY(100%) rotate(-360deg); }
-  }
-
-  @keyframes glow-pulse {
-    0%, 100% { box-shadow: var(--glow-primary); }
-    50% { box-shadow: var(--glow-accent); }
-  }
-
   @keyframes fade-in-up {
     from {
       opacity: 0;
@@ -126,12 +75,22 @@
   }
 
   body {
-    @apply bg-background text-foreground overflow-hidden;
-    /* Hide scrollbar while keeping scroll */
+    @apply bg-background text-foreground;
+    /* Hide scrollbar while keeping scroll functionality */
     scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
   }
   body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  /* Ensure html also hides scrollbar */
+  html {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  html::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
 
   /* Glassmorphism utilities */
@@ -169,28 +128,6 @@
     overflow: hidden;
   }
 
-  .aurora-layer {
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: var(--aurora-gradient-1);
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
-    animation: aurora-move 20s infinite linear;
-  }
-
-  .aurora-layer:nth-child(2) {
-    background: var(--aurora-gradient-2);
-    animation: aurora-secondary 25s infinite linear;
-    opacity: 0.2;
-  }
-
-  .aurora-layer:nth-child(3) {
-    background: linear-gradient(45deg, hsl(var(--aurora-green)) 0%, hsl(var(--aurora-orange)) 100%);
-    animation: aurora-move 30s infinite linear reverse;
-    opacity: 0.15;
-  }
 
   /* Glow effects */
   .glow-on-hover {
@@ -212,7 +149,4 @@
     animation: fade-in-up 0.6s ease-out forwards;
   }
 
-  .animate-glow-pulse {
-    animation: glow-pulse 2s ease-in-out infinite;
-  }
 }
