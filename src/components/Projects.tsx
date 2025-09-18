@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 
-const Projects = () => {
+
+import Heading, { SectionPalette } from "@/components/Heading";
+
+interface ProjectsProps { palette?: SectionPalette }
+
+const Projects = ({ palette }: ProjectsProps) => {
   const projects = [
     {
       title: "E-Commerce Platform",
@@ -40,19 +45,27 @@ const Projects = () => {
   return (
     <section className="py-20 px-4 relative z-10">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center bg-gradient-to-r from-aurora-green to-aurora-orange bg-clip-text text-transparent">
-          Featured Projects
-        </h2>
+        <div className="text-center pb-12">
+          <div className="inline-block">
+            <Heading as="h2" size="lg" className='pb-2' palette={palette}>
+              Featured Projects
+            </Heading>
+            <div className="pt-4 h-[2px] w-full bg-gradient-to-r from-cyan-400/60 via-fuchsia-400/60 to-amber-300/60 rounded-full"></div>
+            <p className="mt-4 text-base md:text-lg text-white/70">
+              A curated selection of work across web, product and brand.
+            </p>
+          </div>
+        </div>
         
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className="glass-card group animate-fade-in-up hover:scale-[1.02] transition-all duration-300"
+              className="glass-card group animate-fade-in-up hover:scale-[1.02] transition-all duration-300 border border-white/10 backdrop-blur-xl"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="space-y-4">
-                <h3 className={`text-2xl font-bold text-${project.color}`}>
+                <h3 className={`text-2xl font-semibold text-white/95`}>
                   {project.title}
                 </h3>
                 
@@ -72,11 +85,11 @@ const Projects = () => {
                 </div>
                 
                 <div className="flex gap-3 pt-4">
-                  <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <Button variant="outline" size="sm" className="flex items-center gap-2 border-white/20 text-white hover:bg-white/5">
                     <Github className="w-4 h-4" />
                     Code
                   </Button>
-                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                  <Button variant="ghost" size="sm" className="flex items-center gap-2 text-white hover:bg-white/10">
                     <ExternalLink className="w-4 h-4" />
                     Live Demo
                   </Button>

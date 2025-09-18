@@ -1,4 +1,8 @@
-const Skills = () => {
+import Heading, { SectionPalette } from "@/components/Heading";
+
+interface SkillsProps { palette?: SectionPalette }
+
+const Skills = ({ palette }: SkillsProps) => {
   const skillCategories = [
     {
       title: "Frontend",
@@ -18,16 +22,16 @@ const Skills = () => {
     {
       title: "Design & UI/UX",
       skills: ["Figma", "Adobe XD", "Photoshop", "Responsive Design", "Accessibility", "User Research"],
-      color: "aurora-orange"
+      color: "aurora-purple"
     }
   ];
 
   return (
     <section className="py-20 px-4 relative z-10">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center bg-gradient-to-r from-aurora-orange to-aurora-aqua bg-clip-text text-transparent">
+        <Heading as="h2" size="lg" palette={palette} className="pb-16">
           Skills & Technologies
-        </h2>
+        </Heading>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {skillCategories.map((category, categoryIndex) => (

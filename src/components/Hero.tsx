@@ -5,8 +5,8 @@ const Hero = () => {
     <section className="min-h-screen flex items-center justify-center relative z-10 px-4">
       <div className="text-center space-y-8 animate-fade-in-up">
         <div className="space-y-4">
-          <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-aurora-aqua via-aurora-purple to-aurora-green bg-clip-text text-transparent">
-            Alex Chen
+          <h1 className="text-6xl md:text-8xl font-premium font-bold bg-gradient-to-r from-aurora-aqua via-aurora-purple to-aurora-green bg-clip-text text-transparent">
+            Aditya Barangali
           </h1>
           <h2 className="text-2xl md:text-3xl font-light text-foreground/80">
             Software Developer
@@ -19,11 +19,11 @@ const Hero = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="aurora" size="lg" className="glow-on-hover">
-            View Projects
+          <Button asChild variant="aurora" size="lg" className="glow-on-hover">
+            <a href="#projects">View Projects</a>
           </Button>
-          <Button variant="glass" size="lg">
-            Contact Me
+          <Button asChild variant="glass" size="lg">
+            <a href="#contact">Contact Me</a>
           </Button>
         </div>
       </div>

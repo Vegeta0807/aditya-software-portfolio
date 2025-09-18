@@ -1,11 +1,15 @@
-const About = () => {
+import Heading, { SectionPalette } from "@/components/Heading";
+
+interface AboutProps { palette?: SectionPalette }
+
+const About = ({ palette }: AboutProps) => {
   return (
     <section className="py-20 px-4 relative z-10">
       <div className="max-w-4xl mx-auto">
         <div className="glass-card animate-fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-aurora-purple to-aurora-aqua bg-clip-text text-transparent">
+          <Heading as="h2" size="lg" palette={palette} className="mb-8">
             About Me
-          </h2>
+          </Heading>
           
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">

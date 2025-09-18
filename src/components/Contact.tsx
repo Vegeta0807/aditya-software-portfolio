@@ -2,14 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from "lucide-react";
+import Heading, { SectionPalette } from "@/components/Heading";
 
-const Contact = () => {
+interface ContactProps { palette?: SectionPalette }
+
+const Contact = ({ palette }: ContactProps) => {
   return (
     <section className="py-20 px-4 relative z-10">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center bg-gradient-to-r from-aurora-purple to-aurora-orange bg-clip-text text-transparent">
+        <Heading as="h2" size="lg" palette={palette} className="mb-16">
           Let's Connect
-        </h2>
+        </Heading>
         
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
@@ -64,7 +67,7 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             <div className="glass-card animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-              <h3 className="text-2xl font-bold mb-6 text-aurora-purple">Get in Touch</h3>
+              <h3 className="text-2xl font-bold mb-6 text-aurora-green">Get in Touch</h3>
               
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-foreground/80">
@@ -101,7 +104,7 @@ const Contact = () => {
             </div>
             
             <div className="glass-card animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-              <h3 className="text-xl font-bold mb-4 text-aurora-orange">Availability</h3>
+              <h3 className="text-xl font-bold mb-4 text-aurora-green">Availability</h3>
               <p className="text-foreground/80">
                 Currently available for freelance projects and full-time opportunities. 
                 Let's discuss how we can work together!
