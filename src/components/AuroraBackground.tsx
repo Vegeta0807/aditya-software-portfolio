@@ -151,7 +151,7 @@ const AuroraBackground = ({ speed = 1.8, palette = {} }: AuroraProps) => {
         uv += (m - 0.5) * 0.065;
 
         // Domain warp
-        vec2 duv = flow(uv, t);
+        vec2 duv = uv; // Modified: Removed flow(uv, t)
 
         // Bands
         float topO   = band(duv, 0.12, 0.092);
@@ -161,10 +161,10 @@ const AuroraBackground = ({ speed = 1.8, palette = {} }: AuroraProps) => {
 
         // Compose
         vec3 col = u_base;
-        col += u_orange * (topO * 1.12);
-        col += u_orange * (botO * 1.02);
-        col += u_blue   * (blueB * 1.12);
-        col += vec3(1.0) * (highlight * 0.05);
+        col += u_orange * (topO * 0.5); // Reduced intensity
+        col += u_orange * (botO * 0.4); // Reduced intensity
+        col += u_blue   * (blueB * 0.5); // Reduced intensity
+        col += vec3(1.0) * (highlight * 0.02); // Reduced intensity
 
         // Breathing pulse
         float breathe = 0.05 * sin(t * 0.55);

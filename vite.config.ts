@@ -4,6 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: './', // Add base path for relative asset loading
   server: {
     host: "::",
     port: 8080,

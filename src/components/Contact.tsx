@@ -10,55 +10,55 @@ const Contact = ({ palette }: ContactProps) => {
   return (
     <section className="py-20 px-4 relative z-10">
       <div className="max-w-4xl mx-auto">
-        <Heading as="h2" size="lg" palette={palette} className="mb-16">
+        <Heading as="h2" size="lg" palette={palette} className="mb-16 text-center">
           Let's Connect
         </Heading>
         
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="glass-card animate-fade-in-up">
-            <h3 className="text-2xl font-bold mb-6 text-aurora-aqua">Send a Message</h3>
+          <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl p-8 border border-gray-700/50 animate-fade-in-up">
+            <h3 className="text-2xl font-bold mb-6 text-white">Send a Message</h3>
             
             <form className="space-y-6">
               <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium text-foreground/80">Name</label>
+                <label htmlFor="name" className="text-sm font-medium text-gray-300">Name</label>
                 <Input 
                   id="name"
                   placeholder="Your Name"
-                  className="glass border-aurora-aqua/30 focus:border-aurora-purple/50"
+                  className="bg-gray-800/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-400/50 transition-colors"
                 />
               </div>
               
               <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium text-foreground/80">Email</label>
+                <label htmlFor="email" className="text-sm font-medium text-gray-300">Email</label>
                 <Input 
                   id="email"
                   type="email"
                   placeholder="your.email@example.com"
-                  className="glass border-aurora-aqua/30 focus:border-aurora-purple/50"
+                  className="bg-gray-800/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-400/50 transition-colors"
                 />
               </div>
               
               <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium text-foreground/80">Subject</label>
+                <label htmlFor="subject" className="text-sm font-medium text-gray-300">Subject</label>
                 <Input 
                   id="subject"
                   placeholder="Project Collaboration"
-                  className="glass border-aurora-aqua/30 focus:border-aurora-purple/50"
+                  className="bg-gray-800/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-400/50 transition-colors"
                 />
               </div>
               
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-foreground/80">Message</label>
+                <label htmlFor="message" className="text-sm font-medium text-gray-300">Message</label>
                 <Textarea 
                   id="message"
                   placeholder="Tell me about your project or just say hello!"
                   rows={5}
-                  className="glass border-aurora-aqua/30 focus:border-aurora-purple/50 resize-none"
+                  className="bg-gray-800/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-400/50 resize-none transition-colors"
                 />
               </div>
               
-              <Button variant="aurora" className="w-full glow-on-hover">
+              <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-colors">
                 Send Message
               </Button>
             </form>
@@ -66,46 +66,46 @@ const Contact = ({ palette }: ContactProps) => {
           
           {/* Contact Information */}
           <div className="space-y-8">
-            <div className="glass-card animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-              <h3 className="text-2xl font-bold mb-6 text-aurora-green">Get in Touch</h3>
+            <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl p-8 border border-gray-700/50 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+              <h3 className="text-2xl font-bold mb-6 text-white">Get in Touch</h3>
               
               <div className="space-y-4">
-                <div className="flex items-center gap-3 text-foreground/80">
-                  <Mail className="w-5 h-5 text-aurora-aqua" />
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Mail className="w-5 h-5 text-blue-400" />
                   <span>alex.chen@example.com</span>
                 </div>
                 
-                <div className="flex items-center gap-3 text-foreground/80">
-                  <Phone className="w-5 h-5 text-aurora-green" />
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Phone className="w-5 h-5 text-blue-400" />
                   <span>+1 (555) 123-4567</span>
                 </div>
                 
-                <div className="flex items-center gap-3 text-foreground/80">
-                  <MapPin className="w-5 h-5 text-aurora-orange" />
+                <div className="flex items-center gap-3 text-gray-300">
+                  <MapPin className="w-5 h-5 text-blue-400" />
                   <span>San Francisco, CA</span>
                 </div>
               </div>
             </div>
             
-            <div className="glass-card animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <h3 className="text-xl font-bold mb-4 text-aurora-green">Follow Me</h3>
+            <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl p-8 border border-gray-700/50 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+              <h3 className="text-xl font-bold mb-4 text-white">Follow Me</h3>
               
               <div className="flex gap-4">
-                <Button variant="glass" size="icon" className="glow-on-hover">
+                <Button variant="outline" size="icon" className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors">
                   <Github className="w-5 h-5" />
                 </Button>
-                <Button variant="glass" size="icon" className="glow-on-hover">
+                <Button variant="outline" size="icon" className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors">
                   <Linkedin className="w-5 h-5" />
                 </Button>
-                <Button variant="glass" size="icon" className="glow-on-hover">
+                <Button variant="outline" size="icon" className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors">
                   <Twitter className="w-5 h-5" />
                 </Button>
               </div>
             </div>
             
-            <div className="glass-card animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-              <h3 className="text-xl font-bold mb-4 text-aurora-green">Availability</h3>
-              <p className="text-foreground/80">
+            <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl p-8 border border-gray-700/50 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+              <h3 className="text-xl font-bold mb-4 text-white">Availability</h3>
+              <p className="text-gray-300">
                 Currently available for freelance projects and full-time opportunities. 
                 Let's discuss how we can work together!
               </p>
