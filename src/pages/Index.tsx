@@ -89,7 +89,11 @@ const Index = () => {
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      console.error(`Element with id '${id}' not found.`);
+    }
   };
 
   return (
@@ -99,54 +103,49 @@ const Index = () => {
       <main className="relative z-10">
         <section id="hero" className="min-h-screen relative text-white/95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
           <div className="pointer-events-auto">
-            {/* Override Hero buttons to link to sections */}
             <Hero />
             <div className="sr-only">Hero section</div>
           </div>
-          <button
-            type="button"
+          <a
+            href="#about"
             aria-label="Scroll to About"
-            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
-            onClick={() => scrollTo("about")}
+            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition z-50"
           >
             <ChevronDown className="w-5 h-5 transition group-hover:translate-y-0.5" />
-          </button>
+          </a>
         </section>
 
         <section id="about" className="min-h-screen relative text-white/95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
           <About palette={palettes.about.palette} />
-          <button
-            type="button"
+          <a
+            href="#projects"
             aria-label="Scroll to Projects"
-            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
-            onClick={() => scrollTo("projects")}
+            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition z-50"
           >
             <ChevronDown className="w-5 h-5 transition group-hover:translate-y-0.5" />
-          </button>
+          </a>
         </section>
 
         <section id="projects" className="min-h-screen relative text-white/95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
           <Projects palette={palettes.projects.palette} />
-          <button
-            type="button"
+          <a
+            href="#skills"
             aria-label="Scroll to Skills"
-            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
-            onClick={() => scrollTo("skills")}
+            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition z-50"
           >
             <ChevronDown className="w-5 h-5 transition group-hover:translate-y-0.5" />
-          </button>
+          </a>
         </section>
 
         <section id="skills" className="min-h-screen relative text-white/95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
           <Skills palette={palettes.skills.palette} />
-          <button
-            type="button"
+          <a
+            href="#contact"
             aria-label="Scroll to Contact"
-            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition"
-            onClick={() => scrollTo("contact")}
+            className="group absolute right-4 bottom-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md p-2 text-white/80 transition z-50"
           >
             <ChevronDown className="w-5 h-5 transition group-hover:translate-y-0.5" />
-          </button>
+          </a>
         </section>
 
         <section id="contact" className="min-h-screen relative text-white/95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
