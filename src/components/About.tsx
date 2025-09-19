@@ -1,4 +1,5 @@
 import Heading, { SectionPalette } from "@/components/Heading";
+import ScrollToLink from "./ScrollToLink";
 
 interface AboutProps { palette?: SectionPalette }
 
@@ -46,6 +47,7 @@ const About = ({ palette }: AboutProps) => {
           </div>
         </div>
       </div>
+      <ScrollToLink href="#projects" />
     </section>
   );
 };

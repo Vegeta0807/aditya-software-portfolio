@@ -1,6 +1,17 @@
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    const targetId = e.currentTarget.href.split('#')[1];
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative z-10 px-4">
       <div className="text-center space-y-8 animate-fade-in-up">
@@ -20,10 +31,10 @@ const Hero = () => {
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild variant="aurora" size="lg" className="glow-on-hover">
-            <a href="#projects">View Projects</a>
+            <a href="#projects" onClick={handleClick}>View Projects</a>
           </Button>
           <Button asChild variant="glass" size="lg">
-            <a href="#contact">Contact Me</a>
+            <a href="#contact" onClick={handleClick}>Contact Me</a>
           </Button>
         </div>
       </div>

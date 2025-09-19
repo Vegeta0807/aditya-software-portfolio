@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from "lucide-react";
 import Heading, { SectionPalette } from "@/components/Heading";
+import ScrollToLink from "./ScrollToLink";
 
 interface ContactProps { palette?: SectionPalette }
 
@@ -16,7 +17,7 @@ const Contact = ({ palette }: ContactProps) => {
         
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl p-8 border border-gray-700/50 animate-fade-in-up">
+          <div className="glass-card p-8 animate-fade-in-up">
             <h3 className="text-2xl font-bold mb-6 text-white">Send a Message</h3>
             
             <form className="space-y-6">
@@ -66,7 +67,7 @@ const Contact = ({ palette }: ContactProps) => {
           
           {/* Contact Information */}
           <div className="space-y-8">
-            <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl p-8 border border-gray-700/50 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+            <div className="glass-card p-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
               <h3 className="text-2xl font-bold mb-6 text-white">Get in Touch</h3>
               
               <div className="space-y-4">
@@ -87,7 +88,7 @@ const Contact = ({ palette }: ContactProps) => {
               </div>
             </div>
             
-            <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl p-8 border border-gray-700/50 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <div className="glass-card p-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               <h3 className="text-xl font-bold mb-4 text-white">Follow Me</h3>
               
               <div className="flex gap-4">
@@ -103,7 +104,7 @@ const Contact = ({ palette }: ContactProps) => {
               </div>
             </div>
             
-            <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl p-8 border border-gray-700/50 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+            <div className="glass-card p-8 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
               <h3 className="text-xl font-bold mb-4 text-white">Availability</h3>
               <p className="text-gray-300">
                 Currently available for freelance projects and full-time opportunities. 
@@ -113,6 +114,7 @@ const Contact = ({ palette }: ContactProps) => {
           </div>
         </div>
       </div>
+      <ScrollToLink href="#hero" />
     </section>
   );
 };

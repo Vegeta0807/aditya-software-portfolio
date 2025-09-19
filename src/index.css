@@ -16,7 +16,7 @@
     /* Glassmorphic card colors */
     --card: 230 15% 12%;
     --card-foreground: 210 40% 98%;
-    --glass: 230 15% 8%; /* Darker glass base color */
+    --glass: 0 0% 0%; /* Darker glass base color */
     --glass-border: 210 40% 15%; /* Darker glass border color */
 
     /* Aurora colors */
@@ -47,7 +47,7 @@
     --radius: 1rem;
 
     /* Glass gradient */
-    --glass-gradient: linear-gradient(135deg, hsla(var(--glass), 0.02) 0%, hsla(var(--glass), 0.01) 100%); /* Further decreased opacity */
+    --glass-gradient: linear-gradient(135deg, hsla(var(--glass), 0.95) 0%, hsla(var(--glass), 0.85) 100%); /* Increased opacity */
 
     /* Glow effects */
     --glow-primary: 0 0 30px hsl(var(--aurora-aqua) / 0.3);
@@ -72,25 +72,6 @@
 
   * {
     @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    /* Hide scrollbar while keeping scroll functionality */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-  }
-  body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
-  
-  /* Ensure html also hides scrollbar */
-  html {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-  }
-  html::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
   }
 
   /* Glassmorphism utilities */
@@ -139,11 +120,6 @@
   .glow-on-hover:hover {
     box-shadow: var(--glow-primary);
     transform: translateY(-2px);
-  }
-
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
   }
 
   /* Animation utilities */

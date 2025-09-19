@@ -4,6 +4,7 @@ import { Github, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Heading, { SectionPalette } from "@/components/Heading";
 import { useState } from "react";
+import ScrollToLink from "./ScrollToLink";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -48,7 +49,6 @@ const Projects = ({ palette }: { palette?: SectionPalette }) => {
         <Heading as="h2" size="lg" palette={palette}>
           Featured Projects
         </Heading>
-        <div className="pt-4 h-[2px] w-40 mx-auto bg-gradient-to-r from-cyan-400/60 via-fuchsia-400/60 to-amber-300/60 rounded-full" />
         <p className="mt-4 text-base md:text-lg text-white/70">
           A curated selection of work across web, product and brand.
         </p>
@@ -101,8 +101,9 @@ const Projects = ({ palette }: { palette?: SectionPalette }) => {
           </div>
         </Swiper>
       </div>
+      <ScrollToLink href="#skills" />
     </section>
-  );
+    );
 };
 
 interface SlideItemProps {
