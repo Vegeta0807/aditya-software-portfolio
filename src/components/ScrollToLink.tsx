@@ -1,18 +1,24 @@
 import { ChevronDown } from "lucide-react";
+import Lenis from "lenis";
 
 interface ScrollToLinkProps {
   href: string;
+  lenis?: Lenis | null;
 }
 
-const ScrollToLink = ({ href }: ScrollToLinkProps) => {
+const ScrollToLink = ({ href, lenis }: ScrollToLinkProps) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
-    const targetId = href.substring(1);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-      });
+    if (lenis) {
+      lenis.scrollTo(href, { offset: -100 });
+    } else {
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
     }
   };
 

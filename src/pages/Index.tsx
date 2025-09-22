@@ -59,8 +59,10 @@ const Index = () => {
 
   // lenis smooth scroll
   useEffect(() => {
+    if (!containerRef.current) return;
+
     const lenis = new Lenis({
-      wrapper: containerRef.current!,
+      wrapper: containerRef.current,
     });
     lenisRef.current = lenis;
 
@@ -71,7 +73,8 @@ const Index = () => {
     requestAnimationFrame(raf);
 
     return () => lenis.destroy();
-  }, []);
+  }, []
+  );
 
   // observe visible section
   useEffect(() => {
