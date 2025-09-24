@@ -21,7 +21,8 @@ const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const to255 = (v: number) => Math.round(clamp01(v) * 255);
 const rgb = (c: RGB) => `rgb(${to255(c[0])}, ${to255(c[1])}, ${to255(c[2])})`;
-const rgba = (c: RGB, a: number) => `rgba(${to255(c[0])}, ${to255(c[1])}, ${to255(c[2])}, ${clamp01(a)})`;
+const rgba = (c: RGB, a: number) =>
+  `rgba(${to255(c[0])}, ${to255(c[1])}, ${to255(c[2])}, ${clamp01(a)})`;
 
 const AuroraBackground = ({ speed = 1.8, palette = {} }: AuroraProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -112,14 +113,14 @@ const AuroraBackground = ({ speed = 1.8, palette = {} }: AuroraProps) => {
 
         float t = u_time * u_speed;
 
-        // ==== INITIAL WAVES ====
-uv.x += sin((uv.y + t*0.08)*6.0) * 0.007;
-uv.y += cos((uv.x + t*0.1)*5.0) * 0.006;
-uv.x += sin((uv.y + t*0.05)*8.0) * 0.004;
-uv.y += cos((uv.x + t*0.06)*10.0) * 0.003;
+        // INITIAL WAVES
+        uv.x += sin((uv.y + t*0.08)*6.0) * 0.007;
+        uv.y += cos((uv.x + t*0.1)*5.0) * 0.006;
+        uv.x += sin((uv.y + t*0.05)*8.0) * 0.004;
+        uv.y += cos((uv.x + t*0.06)*10.0) * 0.003;
 
-        // ==== ROTATION + SWIRL ====
-uv = rotateAround(uv, vec2(0.5), 0.03 * sin(t * 0.1));
+        // ROTATION + SWIRL
+        uv = rotateAround(uv, vec2(0.5), 0.03 * sin(t * 0.1));
         uv = swirl(uv, u_mouse, 3.2);
         uv += (u_mouse - 0.5) * 0.065;
 
@@ -202,11 +203,7 @@ uv = rotateAround(uv, vec2(0.5), 0.03 * sin(t * 0.1));
       if (uniformRef.current?.u_res) gl.uniform2f(uniformRef.current.u_res, w, h);
     };
 
-    let lastMove = 0;
     const onPointerMove = (e: PointerEvent) => {
-      const now = performance.now();
-      if (now - lastMove < 30) return;
-      lastMove = now;
       const rect = canvas.getBoundingClientRect();
       mouseRef.current.x = clamp01((e.clientX - rect.left) / rect.width);
       mouseRef.current.y = clamp01((e.clientY - rect.top) / rect.height);
@@ -221,24 +218,33 @@ uv = rotateAround(uv, vec2(0.5), 0.03 * sin(t * 0.1));
     };
 
     startRef.current = performance.now();
-    let lastFrame = 0;
+
+    const eps = 0.001; // threshold for minimal uniform update
     const render = (time: number) => {
-      if (time - lastFrame > 33) {
-        lastFrame = time;
-        const t = (performance.now() - startRef.current) / 1000;
+      const t = (performance.now() - startRef.current) / 1000;
 
-        const cur = currentPaletteRef.current;
-        const tgt = targetPaletteRef.current;
-        const sCur = currentSpeedRef.current;
-        const sTgt = targetSpeedRef.current;
-        const ease = 0.05;
-        for (let i = 0; i < 3; i++) {
-          cur[i][0] = lerp(cur[i][0], tgt[i][0], ease);
-          cur[i][1] = lerp(cur[i][1], tgt[i][1], ease);
-          cur[i][2] = lerp(cur[i][2], tgt[i][2], ease);
+      // Only update palette if difference is noticeable
+      const cur = currentPaletteRef.current;
+      const tgt = targetPaletteRef.current;
+      let needUpdate = false;
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          const diff = Math.abs(cur[i][j] - tgt[i][j]);
+          if (diff > eps) {
+            cur[i][j] = lerp(cur[i][j], tgt[i][j], 0.05);
+            needUpdate = true;
+          }
         }
-        currentSpeedRef.current = lerp(sCur, sTgt, ease);
+      }
 
+      // Only update speed if difference is noticeable
+      if (Math.abs(currentSpeedRef.current - targetSpeedRef.current) > eps) {
+        currentSpeedRef.current = lerp(currentSpeedRef.current, targetSpeedRef.current, 0.05);
+        needUpdate = true;
+      }
+
+      // Upload uniforms only if needed
+      if (needUpdate || uniformRef.current) {
         if (uniformRef.current?.u_time) gl.uniform1f(uniformRef.current.u_time, t);
         if (uniformRef.current?.u_mouse)
           gl.uniform2f(uniformRef.current.u_mouse, mouseRef.current.x, 1.0 - mouseRef.current.y);
@@ -246,9 +252,9 @@ uv = rotateAround(uv, vec2(0.5), 0.03 * sin(t * 0.1));
         if (uniformRef.current?.u_orange) gl.uniform3f(uniformRef.current.u_orange, cur[0][0], cur[0][1], cur[0][2]);
         if (uniformRef.current?.u_blue) gl.uniform3f(uniformRef.current.u_blue, cur[1][0], cur[1][1], cur[1][2]);
         if (uniformRef.current?.u_base) gl.uniform3f(uniformRef.current.u_base, cur[2][0], cur[2][1], cur[2][2]);
-
-        gl.drawArrays(gl.TRIANGLES, 0, 3);
       }
+
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
       rafRef.current = requestAnimationFrame(render);
     };
 

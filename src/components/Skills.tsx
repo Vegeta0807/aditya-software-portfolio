@@ -7,7 +7,7 @@ const Skills = ({ palette }: SkillsProps) => {
   const skillCategories = [
     {
       title: "Frontend",
-      skills: ["React", "TypeScript", "Next.js", "Vue.js", "Tailwind CSS", "SASS"],
+      skills: ["Angular","React", "TypeScript", "Next.js", "Vue.js", "Tailwind CSS", "SASS"],
       color: "aurora-aqua"
     },
     {
@@ -27,6 +27,33 @@ const Skills = ({ palette }: SkillsProps) => {
     }
   ];
 
+  const colorMap = {
+    "aurora-aqua": {
+      text: "text-aurora-aqua",
+      border: "border-aurora-aqua/30",
+      bg: "bg-aurora-aqua/10",
+      hoverBorder: "hover:border-aurora-aqua/60",
+      hoverBg: "hover:bg-aurora-aqua/20",
+      shadow: "hover:shadow-[0_0_15px_rgba(var(--aurora-aqua_rgb),0.3)]"
+    },
+    "aurora-purple": {
+      text: "text-aurora-purple",
+      border: "border-aurora-purple/30",
+      bg: "bg-aurora-purple/10",
+      hoverBorder: "hover:border-aurora-purple/60",
+      hoverBg: "hover:bg-aurora-purple/20",
+      shadow: "hover:shadow-[0_0_15px_rgba(var(--aurora-purple_rgb),0.3)]"
+    },
+    "aurora-green": {
+      text: "text-aurora-green",
+      border: "border-aurora-green/30",
+      bg: "bg-aurora-green/10",
+      hoverBorder: "hover:border-aurora-green/60",
+      hoverBg: "hover:bg-aurora-green/20",
+      shadow: "hover:shadow-[0_0_15px_rgba(var(--aurora-green_rgb),0.3)]"
+    }
+  };
+
   return (
     <section className="py-20 px-4 relative z-10">
       <div className="max-w-6xl mx-auto">
@@ -35,31 +62,34 @@ const Skills = ({ palette }: SkillsProps) => {
         </Heading>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((category, categoryIndex) => (
-            <div
-              key={category.title}
-              className="glass-card animate-fade-in-up"
-              style={{ animationDelay: `${categoryIndex * 0.1}s` }}
-            >
-              <h3 className={`text-xl font-bold mb-4 text-${category.color}`}>
-                {category.title}
-              </h3>
-              
-              <div className="space-y-3">
-                {category.skills.map((skill, skillIndex) => (
-                  <div
-                    key={skill}
-                    className="relative group"
-                    style={{ animationDelay: `${(categoryIndex * 0.1) + (skillIndex * 0.05)}s` }}
-                  >
-                    <div className={`px-3 py-2 rounded-lg border border-${category.color}/30 bg-${category.color}/10 text-sm font-medium transition-all duration-300 hover:border-${category.color}/60 hover:bg-${category.color}/20 hover:shadow-[0_0_15px_rgba(var(--${category.color.replace('-', '')}_rgb),0.3)] cursor-default`}>
-                      {skill}
+          {skillCategories.map((category, categoryIndex) => {
+            const colors = colorMap[category.color as keyof typeof colorMap];
+            return (
+              <div
+                key={category.title}
+                className="glass-card animate-fade-in-up"
+                style={{ animationDelay: `${categoryIndex * 0.1}s` }}
+              >
+                <h3 className={`text-xl font-bold mb-4 ${colors.text}`}>
+                  {category.title}
+                </h3>
+                
+                <div className="space-y-3">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div
+                      key={skill}
+                      className="relative group"
+                      style={{ animationDelay: `${(categoryIndex * 0.1) + (skillIndex * 0.05)}s` }}
+                    >
+                      <div className={`px-3 py-2 rounded-lg border ${colors.border} ${colors.bg} ${colors.hoverBorder} ${colors.hoverBg} ${colors.shadow} text-sm font-medium transition-all duration-300 cursor-default`}>
+                        {skill}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         
         <div className="mt-16 glass-card text-center">

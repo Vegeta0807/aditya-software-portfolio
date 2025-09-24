@@ -28,7 +28,7 @@ const About = ({ palette }: AboutProps) => {
               </p>
               
               <div className="flex flex-wrap gap-3">
-                {['React', 'TypeScript', 'Node.js', 'Python', 'AWS', 'Docker'].map((tech) => (
+                {['Angular','Vue.js', 'Next.js','React', 'TypeScript', 'Node.js', 'Python', 'AWS', 'Docker'].map((tech) => (
                   <span 
                     key={tech}
                     className="px-3 py-1 text-sm rounded-full border border-aurora-aqua/30 bg-aurora-aqua/10 text-aurora-aqua"

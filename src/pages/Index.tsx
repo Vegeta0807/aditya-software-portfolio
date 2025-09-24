@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import Lenis from "lenis";
 import AuroraBackground from "@/components/AuroraBackground";
 import Hero from "@/components/Hero";
@@ -56,37 +56,53 @@ const Index = () => {
   const [section, setSection] = useState<string>("hero");
   const containerRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
+  const rafId = useRef<number | null>(null);
+  const lastSection = useRef(section); // prevent unnecessary re-renders
 
-  // lenis smooth scroll
+  // ✅ Initialize Lenis (smooth scroll)
   useEffect(() => {
     if (!containerRef.current) return;
 
     const lenis = new Lenis({
       wrapper: containerRef.current,
+      smoothWheel: true,
+      duration: 1.2,
     });
     lenisRef.current = lenis;
 
     const raf = (time: number) => {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId.current = requestAnimationFrame(raf);
     };
-    requestAnimationFrame(raf);
+    rafId.current = requestAnimationFrame(raf);
 
-    return () => lenis.destroy();
-  }, []
-  );
+    return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      lenis.destroy();
+    };
+  }, []);
 
-  // observe visible section
+  // ✅ Observe visible section (throttled)
   useEffect(() => {
     const ids = ["hero", "about", "projects", "skills", "contact"];
+    let throttle = false;
+
     const io = new IntersectionObserver(
       (entries) => {
+        if (throttle) return;
+        throttle = true;
+        setTimeout(() => (throttle = false), 100); // 100ms throttle
+
         let top: IntersectionObserverEntry | undefined;
         for (const e of entries) {
           if (!e.isIntersecting) continue;
           if (!top || e.intersectionRatio > top.intersectionRatio) top = e;
         }
-        if (top) setSection((top.target as HTMLElement).id);
+        const newId = top?.target?.id;
+        if (newId && newId !== lastSection.current) {
+          lastSection.current = newId;
+          setSection(newId);
+        }
       },
       { threshold: 0.5 }
     );
@@ -99,6 +115,7 @@ const Index = () => {
     return () => io.disconnect();
   }, []);
 
+  // ✅ Memoized active palette
   const active = useMemo(
     () => palettes[section as keyof typeof palettes] ?? palettes.hero,
     [section]
