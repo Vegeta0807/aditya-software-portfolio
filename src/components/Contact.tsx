@@ -73,17 +73,17 @@ const Contact = ({ palette }: ContactProps) => {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-gray-300">
                   <Mail className="w-5 h-5 text-blue-400" />
-                  <span>alex.chen@example.com</span>
+                  <span>adityabarangali@gmail.com</span>
                 </div>
                 
                 <div className="flex items-center gap-3 text-gray-300">
                   <Phone className="w-5 h-5 text-blue-400" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+91 7021781485</span>
                 </div>
                 
                 <div className="flex items-center gap-3 text-gray-300">
                   <MapPin className="w-5 h-5 text-blue-400" />
-                  <span>San Francisco, CA</span>
+                  <span>Navi Mumbai, India</span>
                 </div>
               </div>
             </div>
