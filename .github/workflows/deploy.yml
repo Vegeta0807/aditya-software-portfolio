@@ -1,0 +1,50 @@
+name: Build and Deploy Vite site to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  pages: write
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (Vite)
+        run: npm run build
+
+      - name: Debug - show dist
+        run: |
+          echo "pwd: $(pwd)"
+          echo "=== root listing ==="
+          ls -la
+          echo "=== dist listing ==="
+          ls -la dist || true
+          echo "=== head dist/index.html ==="
+          if [ -f dist/index.html ]; then sed -n '1,80p' dist/index.html; else echo "dist/index.html missing"; fi
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
