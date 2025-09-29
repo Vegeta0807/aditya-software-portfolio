@@ -1,25 +1,20 @@
-name: Build and Deploy Vite site to GitHub Pages
+name: Build and deploy (Vite -> GitHub Pages via gh-pages)
 
 on:
   push:
     branches: [ main ]
 
-permissions:
-  pages: write
-  id-token: write
-  contents: read
-
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js (20)
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install dependencies
         run: npm ci
@@ -27,24 +22,15 @@ jobs:
       - name: Build (Vite)
         run: npm run build
 
-      - name: Debug - show dist
+      - name: Show dist (debug)
         run: |
-          echo "pwd: $(pwd)"
-          echo "=== root listing ==="
-          ls -la
           echo "=== dist listing ==="
           ls -la dist || true
           echo "=== head dist/index.html ==="
-          if [ -f dist/index.html ]; then sed -n '1,80p' dist/index.html; else echo "dist/index.html missing"; fi
+          if [ -f dist/index.html ]; then sed -n '1,120p' dist/index.html; else echo "dist/index.html missing"; fi
 
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
