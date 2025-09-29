@@ -1,10 +1,9 @@
-// vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 export default defineConfig({
-  base: "/", // root for GitHub Pages main branch
+  base: '/aditya-software-portfolio/', // <-- must match repo name
   plugins: [react()],
   resolve: {
     alias: {
