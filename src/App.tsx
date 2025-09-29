@@ -23,7 +23,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <AuroraBackground />
-        <HashRouter basename="/aditya-software-portfolio/">
+        <HashRouter>
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
               <Route path="/" element={<LazyIndex />} />
