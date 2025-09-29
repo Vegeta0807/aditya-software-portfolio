@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 export default defineConfig({
-  base: '/aditya-software-portfolio/', // <-- must match repo name
+  base: '/aditya-software-portfolio/', 
   plugins: [react()],
   resolve: {
     alias: {
