@@ -10,6 +10,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-creative";
 
+// ✅ Import images via Vite
+import interiorImg from "@/portfolio-images/interior-designer-webpage.jpg";
+import aiPdfImg from "@/portfolio-images/ai-pdf-chatbot.jpg";
+import thisPortfolioImg from "@/portfolio-images/this-portfolio.jpg";
+
 interface Slide {
   fallback: string;
   title: string;
@@ -20,14 +25,14 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    fallback: "/portfolio-images/Interior designer Webpage.jpg",
+    fallback: interiorImg,
     title: "Interior Designer Portfolio",
     desc: "A stunning portfolio website for an interior designer with custom slideshows and animations.",
     codeLink: "https://github.com",
     liveLink: "https://demo.com",
   },
   {
-    fallback: "/portfolio-images/Ai-Pdf Chatbot.jpg",
+    fallback: aiPdfImg,
     title: "AI PDF Chatbot",
     desc: "Real-time lightweight PDF Ai Chatbot powered by OpenAI, Grok and Llama index.",
     codeLink: "https://github.com",
@@ -41,7 +46,7 @@ const slides: Slide[] = [
     liveLink: "https://demo.com",
   },
   {
-    fallback: "/portfolio-images/This Portfolio.jpg",
+    fallback: thisPortfolioImg,
     title: "Portfolio Website",
     desc: "Interactive webgl based Aurora animations & glassmorphism design.",
     codeLink: "https://github.com",
@@ -133,7 +138,7 @@ const Projects = ({ palette }: { palette?: SectionPalette }) => {
           modules={[Navigation, Autoplay, EffectCreative]}
           slidesPerView={1}
           loop
-          speed={900} // slightly faster but smooth
+          speed={900}
           effect="creative"
           autoplay={{ delay: 4500, disableOnInteraction: false }}
           navigation={{ nextEl: ".custom-next", prevEl: ".custom-prev" }}
