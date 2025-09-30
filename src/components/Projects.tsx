@@ -23,29 +23,29 @@ const slides: Slide[] = [
     fallback: `${import.meta.env.BASE_URL}portfolio-images/interior-designer-webpage.jpg`,
     title: "Interior Designer Portfolio",
     desc: "A stunning portfolio website for an interior designer with custom slideshows and animations.",
-    codeLink: "https://github.com",
-    liveLink: "https://demo.com",
+    codeLink: "https://github.com/Vegeta0807/interior-designer-portfolio.git",
+    liveLink: "https://aruvam.info/",
   },
   {
     fallback: `${import.meta.env.BASE_URL}portfolio-images/ai-pdf-chatbot.jpg`,
     title: "AI PDF Chatbot",
     desc: "Real-time lightweight PDF Ai Chatbot powered by OpenAI, Grok and Llama index.",
-    codeLink: "https://github.com",
-    liveLink: "https://demo.com",
+    codeLink: "https://github.com/Vegeta0807/ai-pdf-complete-monorepo.git",
+    liveLink: "https://ai-pdf-complete-monorepo.onrender.com/",
   },
   {
-    fallback: "https://picsum.photos/1200/1600?random=103",
-    title: "Weather Dashboard",
-    desc: "Location-based forecasts & historical data visualization.",
-    codeLink: "https://github.com",
-    liveLink: "https://demo.com",
+    fallback: "${import.meta.env.BASE_URL}portfolio-images/smartcity.jpg",
+    title: "Smart City App",
+    desc: "Realtime for live tracking goverment buses and also whole a management system.",
+    codeLink: "",
+    liveLink: "",
   },
   {
     fallback: `${import.meta.env.BASE_URL}portfolio-images/this-portfolio.jpg`,
     title: "Portfolio Website",
     desc: "Interactive webgl based Aurora animations & glassmorphism design.",
-    codeLink: "https://github.com",
-    liveLink: "https://demo.com",
+    codeLink: "https://github.com/Vegeta0807/aditya-software-portfolio.git",
+    liveLink: "https://vegeta0807.github.io/aditya-software-portfolio/",
   },
 ];
 // ⚡ Memoized SlideItem to avoid re-renders of every slide on parent updates
@@ -65,9 +65,8 @@ const SlideItem = memo(function SlideItem({ slide }: { slide: Slide }) {
         alt={slide.title}
         loading="lazy"
         decoding="async"
-        className={`w-full h-full object-cover rounded-3xl transition-opacity duration-500 ${
-          loading ? "opacity-0" : "opacity-100"
-        }`}
+        className={`w-full h-full object-cover rounded-3xl transition-opacity duration-500 ${loading ? "opacity-0" : "opacity-100"
+          }`}
         onLoad={() => setLoading(false)}
         onError={(e) => {
           const target = e.currentTarget;
@@ -84,31 +83,36 @@ const SlideItem = memo(function SlideItem({ slide }: { slide: Slide }) {
           {slide.desc}
         </p>
         <div className="flex gap-3">
-          <Button variant="outline" size="sm" asChild>
-            <a
-              href={slide.codeLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <Github className="w-4 h-4" />
-              Code
-            </a>
-          </Button>
+          {slide.codeLink && (
+            <Button variant="outline" size="sm" asChild>
+              <a
+                href={slide.codeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <Github className="w-4 h-4" />
+                Code
+              </a>
+            </Button>
+          )}
 
-          <Button variant="ghost" size="sm" asChild>
-            <a
-              href={slide.liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <ExternalLink className="w-4 h-4" />
-              Live
-            </a>
-          </Button>
+          {slide.liveLink && (
+            <Button variant="ghost" size="sm" asChild>
+              <a
+                href={slide.liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Live
+              </a>
+            </Button>
+          )}
         </div>
       </div>
+
     </div>
   );
 });
