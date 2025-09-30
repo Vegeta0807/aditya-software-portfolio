@@ -34,7 +34,7 @@ const slides: Slide[] = [
     liveLink: "https://ai-pdf-complete-monorepo.onrender.com/",
   },
   {
-    fallback: "${import.meta.env.BASE_URL}portfolio-images/smartcity.jpg",
+    fallback: `${import.meta.env.BASE_URL}portfolio-images/smartcity.jpg`,
     title: "Smart City App",
     desc: "Realtime for live tracking goverment buses and also whole a management system.",
     codeLink: "",

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,6 +9,38 @@ import ScrollToLink from "./ScrollToLink";
 interface ContactProps { palette?: SectionPalette }
 
 const Contact = ({ palette }: ContactProps) => {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("loading");
+    setMessage("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch("https://formspree.io/f/mrbyqaye", {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        setMessage("✅ Thank you! Your message has been sent.");
+        form.reset();
+      } else {
+        setStatus("error");
+        setMessage("❌ Oops! Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setStatus("error");
+      setMessage("❌ Network error. Please try again later.");
+    }
+  };
+
   return (
     <section className="py-20 px-4 relative z-10">
       <div className="max-w-4xl mx-auto">
@@ -20,12 +53,14 @@ const Contact = ({ palette }: ContactProps) => {
           <div className="glass-card p-8 animate-fade-in-up">
             <h3 className="text-2xl font-bold mb-6 text-white">Send a Message</h3>
             
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium text-gray-300">Name</label>
                 <Input 
                   id="name"
+                  name="name"
                   placeholder="Your Name"
+                  required
                   className="bg-gray-800/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-400/50 transition-colors"
                 />
               </div>
@@ -34,8 +69,10 @@ const Contact = ({ palette }: ContactProps) => {
                 <label htmlFor="email" className="text-sm font-medium text-gray-300">Email</label>
                 <Input 
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="your.email@example.com"
+                  required
                   className="bg-gray-800/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-400/50 transition-colors"
                 />
               </div>
@@ -44,6 +81,7 @@ const Contact = ({ palette }: ContactProps) => {
                 <label htmlFor="subject" className="text-sm font-medium text-gray-300">Subject</label>
                 <Input 
                   id="subject"
+                  name="subject"
                   placeholder="Project Collaboration"
                   className="bg-gray-800/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-400/50 transition-colors"
                 />
@@ -53,15 +91,31 @@ const Contact = ({ palette }: ContactProps) => {
                 <label htmlFor="message" className="text-sm font-medium text-gray-300">Message</label>
                 <Textarea 
                   id="message"
+                  name="message"
                   placeholder="Tell me about your project or just say hello!"
                   rows={5}
+                  required
                   className="bg-gray-800/50 border-gray-600/50 text-white placeholder-gray-400 focus:border-blue-400/50 resize-none transition-colors"
                 />
               </div>
               
-              <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-colors">
-                Send Message
+              <Button 
+                type="submit"
+                disabled={status === "loading"}
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-colors"
+              >
+                {status === "loading" ? "Sending..." : "Send Message"}
               </Button>
+
+              {status !== "idle" && (
+                <p
+                  className={`text-sm mt-2 ${
+                    status === "success" ? "text-green-400" : "text-red-400"
+                  }`}
+                >
+                  {message}
+                </p>
+              )}
             </form>
           </div>
           
