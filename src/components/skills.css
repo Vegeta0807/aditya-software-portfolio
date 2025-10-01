@@ -1,47 +1,6 @@
 /* -------------------- */
-/* Navigation arrows - only arrows, no background */
-/* -------------------- */
-.swiper-button-next,
-.swiper-button-prev {
-  @apply text-accent transition duration-300;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  @apply text-aurora-purple;
-}
-
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 1.5rem;
-}
-
-/* -------------------- */
-/* Pagination bullets */
-/* -------------------- */
-.swiper-pagination-bullet {
-  @apply bg-glass border border-glass-border opacity-70 transition;
-}
-
-.swiper-pagination-bullet-active {
-  @apply bg-accent opacity-100 shadow-md;
-}
-
-/* -------------------- */
-/* Active slide glow - pulsing halo */
-/* -------------------- */
-.swiper-slide-active .glass-card {
-  position: relative;
-  border-radius: 1rem;
-  z-index: 10;
-}
-
-.swiper-slide-active .glass-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 0;
+/* Active slide glow div */
+.glow-div {
   background: linear-gradient(
     135deg,
     hsl(var(--aurora-purple)/0.6),
@@ -51,8 +10,6 @@
   );
   filter: blur(20px);
   opacity: 0.7;
-  z-index: -1;
-  pointer-events: none;
   animation: glowPulse 3s ease-in-out infinite, glowRotate 6s linear infinite;
 }
 
@@ -70,8 +27,35 @@
 }
 
 /* -------------------- */
-/* Individual skill item hover glow - restore previous effect */
+/* Individual skill item hover glow */
+.hover\:skill-glow:hover {
+  border-color: hsl(var(--accent));
+  background-color: hsl(var(--accent)/20);
+  box-shadow: 0 0 15px rgba(var(--accent_rgb),0.3);
+}
+
 /* -------------------- */
-.glass-card > div > div:hover {
-  @apply border-accent bg-accent/20 shadow-[0_0_15px_rgba(var(--accent_rgb),0.3)];
+/* Navigation arrows */
+.swiper-button-next,
+.swiper-button-prev {
+  @apply text-accent transition duration-300;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  @apply text-aurora-purple;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1.5rem;
+}
+
+/* Pagination bullets */
+.swiper-pagination-bullet {
+  @apply bg-glass border border-glass-border opacity-70 transition;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-accent opacity-100 shadow-md;
 }

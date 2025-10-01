@@ -107,7 +107,6 @@ const Skills = ({ palette }: SkillsProps) => {
           effect="coverflow"
           grabCursor={true}
           centeredSlides={true}
-          slidesPerView={3}
           loop={true}
           coverflowEffect={{
             rotate: 20,
@@ -118,14 +117,19 @@ const Skills = ({ palette }: SkillsProps) => {
           }}
           pagination={{ clickable: true }}
           navigation
+          breakpoints={{
+            0: { slidesPerView: 1, spaceBetween: 20 },
+            640: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 30 },
+          }}
           className="skills-swiper"
         >
-          {skillCategories.map((category) => (
-            <SwiperSlide
-              key={category.title}
-              className="flex items-stretch" // ensures uniform height
-            >
-              <div className="glass-card p-6 flex flex-col h-full w-full max-w-sm mx-auto">
+          {skillCategories.map((category, idx) => (
+            <SwiperSlide key={category.title} className="flex items-stretch">
+              <div className="glass-card p-6 flex flex-col h-full w-full max-w-sm mx-auto relative">
+                {/* Glow div for active slide */}
+                <div className="absolute inset-0 rounded-lg z-[-1] pointer-events-none glow-div"></div>
+
                 <h3 className={`text-xl font-bold mb-4 text-${category.color}`}>
                   {category.title}
                 </h3>
@@ -133,7 +137,7 @@ const Skills = ({ palette }: SkillsProps) => {
                   {category.skills.map((skill) => (
                     <div
                       key={skill}
-                      className="px-3 py-2 rounded-lg border border-glass-border bg-glass text-sm font-medium transition-all duration-300 cursor-default text-foreground"
+                      className="px-3 py-2 rounded-lg border border-glass-border bg-glass text-sm font-medium transition-all duration-300 cursor-default text-foreground hover:skill-glow"
                     >
                       {skill}
                     </div>
