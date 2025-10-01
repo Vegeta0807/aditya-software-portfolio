@@ -1,6 +1,7 @@
 /* -------------------- */
 /* Active slide glow div */
-.glow-div {
+.swiper-slide-active .glow-div {
+  display: block; /* show only for active slide */
   background: linear-gradient(
     135deg,
     hsl(var(--aurora-purple)/0.6),
@@ -10,7 +11,10 @@
   );
   filter: blur(20px);
   opacity: 0.7;
+  z-index: -1;
+  pointer-events: none;
   animation: glowPulse 3s ease-in-out infinite, glowRotate 6s linear infinite;
+  border-radius: inherit;
 }
 
 /* Glow rotation animation */
@@ -27,11 +31,9 @@
 }
 
 /* -------------------- */
-/* Individual skill item hover glow */
-.hover\:skill-glow:hover {
+/* Individual skill item hover glow - border only */
+.glass-card > div > div:hover {
   border-color: hsl(var(--accent));
-  background-color: hsl(var(--accent)/20);
-  box-shadow: 0 0 15px rgba(var(--accent_rgb),0.3);
 }
 
 /* -------------------- */
@@ -51,6 +53,7 @@
   font-size: 1.5rem;
 }
 
+/* -------------------- */
 /* Pagination bullets */
 .swiper-pagination-bullet {
   @apply bg-glass border border-glass-border opacity-70 transition;

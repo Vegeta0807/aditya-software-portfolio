@@ -124,11 +124,11 @@ const Skills = ({ palette }: SkillsProps) => {
           }}
           className="skills-swiper"
         >
-          {skillCategories.map((category, idx) => (
-            <SwiperSlide key={category.title} className="flex items-stretch">
+          {skillCategories.map((category) => (
+            <SwiperSlide key={category.title} className="flex items-stretch relative">
               <div className="glass-card p-6 flex flex-col h-full w-full max-w-sm mx-auto relative">
-                {/* Glow div for active slide */}
-                <div className="absolute inset-0 rounded-lg z-[-1] pointer-events-none glow-div"></div>
+                {/* Glow div for active slide only */}
+                <div className="absolute inset-0 rounded-lg pointer-events-none glow-div hidden"></div>
 
                 <h3 className={`text-xl font-bold mb-4 text-${category.color}`}>
                   {category.title}
@@ -137,7 +137,7 @@ const Skills = ({ palette }: SkillsProps) => {
                   {category.skills.map((skill) => (
                     <div
                       key={skill}
-                      className="px-3 py-2 rounded-lg border border-glass-border bg-glass text-sm font-medium transition-all duration-300 cursor-default text-foreground hover:skill-glow"
+                      className="px-3 py-2 rounded-lg border border-glass-border bg-glass text-sm font-medium cursor-default transition-all duration-300 hover:border-accent hover:shadow-none"
                     >
                       {skill}
                     </div>
