@@ -1,7 +1,6 @@
-/* -------------------- */
 /* Active slide glow div */
 .swiper-slide-active .glow-div {
-  display: block; /* show only for active slide */
+  display: block;
   background: linear-gradient(
     135deg,
     hsl(var(--aurora-purple)/0.6),
@@ -9,7 +8,7 @@
     hsl(var(--aurora-green)/0.6),
     hsl(var(--aurora-orange)/0.6)
   );
-  filter: blur(20px);
+  filter: blur(25px);
   opacity: 0.7;
   z-index: -1;
   pointer-events: none;
@@ -24,19 +23,17 @@
   100% { background-position: 0% 50%; }
 }
 
-/* Pulse animation - gently scales opacity */
+/* Pulse animation */
 @keyframes glowPulse {
   0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(1.05); }
+  50% { opacity: 0.9; transform: scale(1.05); }
 }
 
-/* -------------------- */
-/* Individual skill item hover glow - border only */
+/* Skill item hover – only border glow */
 .glass-card > div > div:hover {
   border-color: hsl(var(--accent));
 }
 
-/* -------------------- */
 /* Navigation arrows */
 .swiper-button-next,
 .swiper-button-prev {
@@ -53,7 +50,6 @@
   font-size: 1.5rem;
 }
 
-/* -------------------- */
 /* Pagination bullets */
 .swiper-pagination-bullet {
   @apply bg-glass border border-glass-border opacity-70 transition;
