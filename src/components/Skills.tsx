@@ -107,7 +107,7 @@ const Skills = ({ palette }: SkillsProps) => {
           effect="coverflow"
           grabCursor={true}
           centeredSlides={true}
-          slidesPerView="auto"
+          slidesPerView={3}
           loop={true}
           coverflowEffect={{
             rotate: 20,
@@ -123,12 +123,10 @@ const Skills = ({ palette }: SkillsProps) => {
           {skillCategories.map((category) => (
             <SwiperSlide
               key={category.title}
-              className="!h-auto flex items-stretch" // ensures uniform height
+              className="flex items-stretch" // ensures uniform height
             >
-              <div className="glass-card p-6 w-80 flex flex-col h-full">
-                <h3
-                  className={`text-xl font-bold mb-4 text-${category.color}`}
-                >
+              <div className="glass-card p-6 flex flex-col h-full w-full max-w-sm mx-auto">
+                <h3 className={`text-xl font-bold mb-4 text-${category.color}`}>
                   {category.title}
                 </h3>
                 <div className="space-y-3 flex-1">

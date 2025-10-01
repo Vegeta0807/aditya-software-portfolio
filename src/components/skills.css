@@ -1,16 +1,25 @@
-/* Swiper navigation buttons */
+/* -------------------- */
+/* Navigation arrows - only arrows, no background */
+/* -------------------- */
 .swiper-button-next,
 .swiper-button-prev {
-  @apply bg-glass/70 backdrop-blur-md border border-glass-border text-accent 
-         p-3 rounded-full shadow-lg transition duration-300;
+  @apply text-accent transition duration-300;
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  @apply bg-accent text-accent-foreground shadow-xl;
+  @apply text-aurora-purple;
 }
 
-/* Swiper pagination dots */
+/* smaller arrow icons */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1.5rem;
+}
+
+/* -------------------- */
+/* Pagination bullets */
+/* -------------------- */
 .swiper-pagination-bullet {
   @apply bg-glass border border-glass-border opacity-70 transition;
 }
@@ -19,7 +28,9 @@
   @apply bg-accent opacity-100 shadow-md;
 }
 
-/* Active slide glow effect */
+/* -------------------- */
+/* Active slide gradient glow */
+/* -------------------- */
 .swiper-slide-active .glass-card {
   position: relative;
   border-radius: 1rem;
@@ -45,7 +56,7 @@
   animation: glowRotate 6s linear infinite;
 }
 
-/* Glow animation */
+/* Glow rotation animation */
 @keyframes glowRotate {
   0% {
     background-position: 0% 50%;
