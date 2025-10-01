@@ -1,11 +1,12 @@
 import Heading, { SectionPalette } from "@/components/Heading";
 import ScrollToLink from "./ScrollToLink";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper";
+import { Navigation, Pagination, Autoplay, EffectCoverflow } from "swiper";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
 
 interface SkillsProps {
   palette?: SectionPalette;
@@ -72,14 +73,7 @@ const Skills = ({ palette }: SkillsProps) => {
     },
     {
       title: "Mobile Development",
-      skills: [
-        "Swift",
-        "Kotlin",
-        "Flutter",
-        "Dart",
-        "Xcode",
-        "Android Studio",
-      ],
+      skills: ["Swift", "Kotlin", "Flutter", "Dart", "Xcode", "Android Studio"],
       color: "aurora-aqua",
     },
     {
@@ -93,6 +87,7 @@ const Skills = ({ palette }: SkillsProps) => {
         "Natural Language Processing",
         "Vector Databases",
       ],
+      color: "aurora-orange", // fallback to your config
     },
   ];
 
@@ -103,7 +98,7 @@ const Skills = ({ palette }: SkillsProps) => {
       bg: "bg-aurora-aqua/10",
       hoverBorder: "hover:border-aurora-aqua/60",
       hoverBg: "hover:bg-aurora-aqua/20",
-      shadow: "hover:shadow-[0_0_15px_rgba(var(--aurora-aqua_rgb),0.3)]",
+      shadow: "hover:shadow-[0_0_20px_hsl(var(--aurora-aqua))]",
     },
     "aurora-purple": {
       text: "text-aurora-purple",
@@ -111,7 +106,7 @@ const Skills = ({ palette }: SkillsProps) => {
       bg: "bg-aurora-purple/10",
       hoverBorder: "hover:border-aurora-purple/60",
       hoverBg: "hover:bg-aurora-purple/20",
-      shadow: "hover:shadow-[0_0_15px_rgba(var(--aurora-purple_rgb),0.3)]",
+      shadow: "hover:shadow-[0_0_20px_hsl(var(--aurora-purple))]",
     },
     "aurora-green": {
       text: "text-aurora-green",
@@ -119,7 +114,15 @@ const Skills = ({ palette }: SkillsProps) => {
       bg: "bg-aurora-green/10",
       hoverBorder: "hover:border-aurora-green/60",
       hoverBg: "hover:bg-aurora-green/20",
-      shadow: "hover:shadow-[0_0_15px_rgba(var(--aurora-green_rgb),0.3)]",
+      shadow: "hover:shadow-[0_0_20px_hsl(var(--aurora-green))]",
+    },
+    "aurora-orange": {
+      text: "text-aurora-orange",
+      border: "border-aurora-orange/30",
+      bg: "bg-aurora-orange/10",
+      hoverBorder: "hover:border-aurora-orange/60",
+      hoverBg: "hover:bg-aurora-orange/20",
+      shadow: "hover:shadow-[0_0_20px_hsl(var(--aurora-orange))]",
     },
   };
 
@@ -130,58 +133,49 @@ const Skills = ({ palette }: SkillsProps) => {
           Skills & Technologies
         </Heading>
 
-        {/* Swiper Carousel */}
+        {/* Swiper Coverflow Carousel */}
         <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={20}
+          modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
+          effect="coverflow"
+          grabCursor
+          centeredSlides
+          slidesPerView="auto"
+          coverflowEffect={{
+            rotate: 30,
+            stretch: 0,
+            depth: 150,
+            modifier: 1,
+            slideShadows: true,
+          }}
           navigation
           pagination={{ clickable: true }}
-          autoplay={{ delay: 4000 }}
-          breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-            1280: { slidesPerView: 4 },
-          }}
+          autoplay={{ delay: 3500, disableOnInteraction: false }}
+          className="pb-12"
         >
-          {skillCategories.map((category, categoryIndex) => {
+          {skillCategories.map((category) => {
             const colors =
-              colorMap[category.color as keyof typeof colorMap] || {
-                text: "text-aurora-green",
-                border: "border-aurora-green/30",
-                bg: "bg-aurora-green/10",
-                hoverBorder: "hover:border-aurora-green/60",
-                hoverBg: "hover:bg-aurora-green/20",
-                shadow:
-                  "hover:shadow-[0_0_15px_rgba(var(--aurora-green_rgb),0.3)]",
-              };
+              colorMap[category.color as keyof typeof colorMap] ||
+              colorMap["aurora-green"];
 
             return (
-              <SwiperSlide key={category.title}>
-                <div
-                  className="glass-card animate-fade-in-up h-full"
-                  style={{ animationDelay: `${categoryIndex * 0.1}s` }}
-                >
+              <SwiperSlide
+                key={category.title}
+                className="!w-[280px] sm:!w-[320px] md:!w-[350px]"
+              >
+                <div className="glass-card flex flex-col h-[420px] justify-between p-6">
+                  {/* Title */}
                   <h3 className={`text-xl font-bold mb-4 ${colors.text}`}>
                     {category.title}
                   </h3>
 
-                  <div className="space-y-3">
-                    {category.skills.map((skill, skillIndex) => (
+                  {/* Skills */}
+                  <div className="space-y-3 flex-1 overflow-hidden">
+                    {category.skills.map((skill) => (
                       <div
                         key={skill}
-                        className="relative group"
-                        style={{
-                          animationDelay: `${
-                            categoryIndex * 0.1 + skillIndex * 0.05
-                          }s`,
-                        }}
+                        className={`px-3 py-2 rounded-lg border ${colors.border} ${colors.bg} ${colors.hoverBorder} ${colors.hoverBg} ${colors.shadow} text-sm font-medium transition-all duration-300`}
                       >
-                        <div
-                          className={`px-3 py-2 rounded-lg border ${colors.border} ${colors.bg} ${colors.hoverBorder} ${colors.hoverBg} ${colors.shadow} text-sm font-medium transition-all duration-300 cursor-default`}
-                        >
-                          {skill}
-                        </div>
+                        {skill}
                       </div>
                     ))}
                   </div>
@@ -191,6 +185,7 @@ const Skills = ({ palette }: SkillsProps) => {
           })}
         </Swiper>
 
+        {/* Bottom Card */}
         <div className="mt-16 glass-card text-center">
           <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-aurora-purple to-aurora-green bg-clip-text text-transparent">
             Always Learning
