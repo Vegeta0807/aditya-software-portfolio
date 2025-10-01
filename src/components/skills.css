@@ -1,0 +1,59 @@
+/* Swiper navigation buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  @apply bg-glass/70 backdrop-blur-md border border-glass-border text-accent 
+         p-3 rounded-full shadow-lg transition duration-300;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  @apply bg-accent text-accent-foreground shadow-xl;
+}
+
+/* Swiper pagination dots */
+.swiper-pagination-bullet {
+  @apply bg-glass border border-glass-border opacity-70 transition;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-accent opacity-100 shadow-md;
+}
+
+/* Active slide glow effect */
+.swiper-slide-active .glass-card {
+  position: relative;
+  border-radius: 1rem;
+}
+
+.swiper-slide-active .glass-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--aurora-purple)),
+    hsl(var(--aurora-aqua)),
+    hsl(var(--aurora-green)),
+    hsl(var(--aurora-orange))
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  z-index: -1;
+  animation: glowRotate 6s linear infinite;
+}
+
+/* Glow animation */
+@keyframes glowRotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

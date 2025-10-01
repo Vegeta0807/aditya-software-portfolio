@@ -1,12 +1,16 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, EffectCoverflow } from "swiper";
 import Heading, { SectionPalette } from "@/components/Heading";
 import ScrollToLink from "./ScrollToLink";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay, EffectCoverflow } from "swiper";
 
+// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
+
+// Import our custom CSS for glow & buttons
+import "./skills.css";
 
 interface SkillsProps {
   palette?: SectionPalette;
@@ -87,44 +91,9 @@ const Skills = ({ palette }: SkillsProps) => {
         "Natural Language Processing",
         "Vector Databases",
       ],
-      color: "aurora-orange", // fallback to your config
+      color: "aurora-green",
     },
   ];
-
-  const colorMap = {
-    "aurora-aqua": {
-      text: "text-aurora-aqua",
-      border: "border-aurora-aqua/30",
-      bg: "bg-aurora-aqua/10",
-      hoverBorder: "hover:border-aurora-aqua/60",
-      hoverBg: "hover:bg-aurora-aqua/20",
-      shadow: "hover:shadow-[0_0_20px_hsl(var(--aurora-aqua))]",
-    },
-    "aurora-purple": {
-      text: "text-aurora-purple",
-      border: "border-aurora-purple/30",
-      bg: "bg-aurora-purple/10",
-      hoverBorder: "hover:border-aurora-purple/60",
-      hoverBg: "hover:bg-aurora-purple/20",
-      shadow: "hover:shadow-[0_0_20px_hsl(var(--aurora-purple))]",
-    },
-    "aurora-green": {
-      text: "text-aurora-green",
-      border: "border-aurora-green/30",
-      bg: "bg-aurora-green/10",
-      hoverBorder: "hover:border-aurora-green/60",
-      hoverBg: "hover:bg-aurora-green/20",
-      shadow: "hover:shadow-[0_0_20px_hsl(var(--aurora-green))]",
-    },
-    "aurora-orange": {
-      text: "text-aurora-orange",
-      border: "border-aurora-orange/30",
-      bg: "bg-aurora-orange/10",
-      hoverBorder: "hover:border-aurora-orange/60",
-      hoverBg: "hover:bg-aurora-orange/20",
-      shadow: "hover:shadow-[0_0_20px_hsl(var(--aurora-orange))]",
-    },
-  };
 
   return (
     <section className="py-20 px-4 relative z-10">
@@ -133,59 +102,50 @@ const Skills = ({ palette }: SkillsProps) => {
           Skills & Technologies
         </Heading>
 
-        {/* Swiper Coverflow Carousel */}
         <Swiper
-          modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
+          modules={[Navigation, Pagination, EffectCoverflow]}
           effect="coverflow"
-          grabCursor
-          centeredSlides
+          grabCursor={true}
+          centeredSlides={true}
           slidesPerView="auto"
+          loop={true}
           coverflowEffect={{
-            rotate: 30,
+            rotate: 20,
             stretch: 0,
             depth: 150,
             modifier: 1,
-            slideShadows: true,
+            slideShadows: false,
           }}
-          navigation
           pagination={{ clickable: true }}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
-          className="pb-12"
+          navigation
+          className="skills-swiper"
         >
-          {skillCategories.map((category) => {
-            const colors =
-              colorMap[category.color as keyof typeof colorMap] ||
-              colorMap["aurora-green"];
-
-            return (
-              <SwiperSlide
-                key={category.title}
-                className="!w-[280px] sm:!w-[320px] md:!w-[350px]"
-              >
-                <div className="glass-card flex flex-col h-[420px] justify-between p-6">
-                  {/* Title */}
-                  <h3 className={`text-xl font-bold mb-4 ${colors.text}`}>
-                    {category.title}
-                  </h3>
-
-                  {/* Skills */}
-                  <div className="space-y-3 flex-1 overflow-hidden">
-                    {category.skills.map((skill) => (
-                      <div
-                        key={skill}
-                        className={`px-3 py-2 rounded-lg border ${colors.border} ${colors.bg} ${colors.hoverBorder} ${colors.hoverBg} ${colors.shadow} text-sm font-medium transition-all duration-300`}
-                      >
-                        {skill}
-                      </div>
-                    ))}
-                  </div>
+          {skillCategories.map((category) => (
+            <SwiperSlide
+              key={category.title}
+              className="!h-auto flex items-stretch" // ensures uniform height
+            >
+              <div className="glass-card p-6 w-80 flex flex-col h-full">
+                <h3
+                  className={`text-xl font-bold mb-4 text-${category.color}`}
+                >
+                  {category.title}
+                </h3>
+                <div className="space-y-3 flex-1">
+                  {category.skills.map((skill) => (
+                    <div
+                      key={skill}
+                      className="px-3 py-2 rounded-lg border border-glass-border bg-glass text-sm font-medium transition-all duration-300 cursor-default text-foreground"
+                    >
+                      {skill}
+                    </div>
+                  ))}
                 </div>
-              </SwiperSlide>
-            );
-          })}
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
 
-        {/* Bottom Card */}
         <div className="mt-16 glass-card text-center">
           <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-aurora-purple to-aurora-green bg-clip-text text-transparent">
             Always Learning
