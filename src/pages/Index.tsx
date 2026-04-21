@@ -6,6 +6,7 @@ import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
+import Testimonials from "@/components/Testimonials";
 import type { SectionPalette } from "@/components/Heading";
 import ScrollToLink from "@/components/ScrollToLink";
 
@@ -41,6 +42,14 @@ const palettes: Record<string, { palette: SectionPalette; speed: number }> = {
       base: [0.03, 0.035, 0.06],
     },
     speed: 2.1,
+  },
+  testimonials: {
+    palette: {
+      orange: [0.9, 0.6, 0.1],
+      blue: [0.3, 0.8, 0.6],
+      base: [0.03, 0.04, 0.065],
+    },
+    speed: 2.2,
   },
   contact: {
     palette: {
@@ -84,7 +93,7 @@ const Index = () => {
 
   // ✅ Observe visible section (throttled)
   useEffect(() => {
-    const ids = ["hero", "about", "projects", "skills", "contact"];
+    const ids = ["hero", "about", "projects", "skills", "testimonials", "contact"];
     let throttle = false;
 
     const io = new IntersectionObserver(
@@ -158,6 +167,14 @@ const Index = () => {
           className="min-h-screen snap-start relative text-white/95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]"
         >
           <Skills palette={palettes.skills.palette} />
+          <ScrollToLink href="#testimonials" lenis={lenisRef.current} />
+        </section>
+
+        <section
+          id="testimonials"
+          className="min-h-screen snap-start relative text-white/95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]"
+        >
+          <Testimonials palette={palettes.testimonials.palette} />
           <ScrollToLink href="#contact" lenis={lenisRef.current} />
         </section>
 

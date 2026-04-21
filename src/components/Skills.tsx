@@ -159,7 +159,7 @@ const Skills = ({ palette }: SkillsProps) => {
           </p>
         </div>
       </div>
-      <ScrollToLink href="#contact" />
+      <ScrollToLink href="#testimonials" />
     </section>
   );
 };
