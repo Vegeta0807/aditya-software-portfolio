@@ -47,6 +47,13 @@ const slides: Slide[] = [
     codeLink: "https://github.com/Vegeta0807/aditya-software-portfolio.git",
     liveLink: "https://vegeta0807.github.io/aditya-software-portfolio/",
   },
+  {
+    fallback: `${import.meta.env.BASE_URL}portfolio-images/idli-house.png`,
+    title: "IDLI House",
+    desc: "Premium idli & batter brand showcase — built with React, featuring a rich hero, quality highlights, and product sections.",
+    codeLink: "https://github.com/Vegeta0807/idli-house-showcase.git",
+    liveLink: "https://vegeta0807.github.io/idli-house-showcase/",
+  },
 ];
 // ⚡ Memoized SlideItem to avoid re-renders of every slide on parent updates
 const SlideItem = memo(function SlideItem({ slide }: { slide: Slide }) {
